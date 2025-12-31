@@ -394,6 +394,22 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[
             {
+              title: "Ledger App",
+              impact: "Full-stack financial tracking application with real-time data management and responsive design for personal expense management.",
+              tags: ["React", "Node.js", "MongoDB", "CSS3"],
+              gradient: "from-green-400 to-green-500",
+              link: "https://frontend-neon-two-16.vercel.app/",
+              isLive: true
+            },
+            {
+              title: "Movie Search",
+              impact: "Dynamic movie discovery platform with real-time search functionality and detailed movie information using external APIs.",
+              tags: ["JavaScript", "API Integration", "CSS3", "Responsive"],
+              gradient: "from-purple-400 to-purple-500", 
+              link: "https://movie-search1.onrender.com/",
+              isLive: true
+            },
+            {
               title: "DentalScan AI",
               impact: "HIPAA-compliant dental diagnostic MVP that reduced patient intake friction with AI-driven mobile entry system and JWT-based authentication.",
               tags: ["HealthTech", "React", "Spring Boot", "AWS", "AI"],
@@ -429,42 +445,62 @@ export default function Home() {
               tags: ["Spring Boot", "TypeScript", "MySQL", "Docker", "AWS"],
               gradient: "from-blue-600 to-blue-700"
             }
-          ].map((project, index) => (
-            <motion.div 
-              key={project.title}
-              initial={{ y: 50, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ y: -15, scale: 1.02 }}
-              className="group p-8 bg-white dark:bg-slate-800 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-700 hover:shadow-3xl transition-all duration-300 relative overflow-hidden"
-            >
-              <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${project.gradient} opacity-10 rounded-full -translate-y-16 translate-x-16 group-hover:scale-150 transition-transform duration-500`}></div>
-              <div className="relative z-10">
-                <div className={`text-sm bg-gradient-to-r ${project.gradient} bg-clip-text text-transparent font-bold mb-3 uppercase tracking-widest`}>
-                  {project.tags[0]}
+          ].map((project, index) => {
+            const ProjectWrapper = project.link ? motion.a : motion.div;
+            
+            return (
+              <ProjectWrapper
+                key={project.title}
+                href={project.link}
+                target={project.link ? "_blank" : undefined}
+                rel={project.link ? "noopener noreferrer" : undefined}
+                initial={{ y: 50, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                whileHover={{ y: -15, scale: 1.02 }}
+                className={`group p-8 bg-white dark:bg-slate-800 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-700 hover:shadow-3xl transition-all duration-300 relative overflow-hidden ${project.link ? 'cursor-pointer' : ''}`}
+              >
+                <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${project.gradient} opacity-10 rounded-full -translate-y-16 translate-x-16 group-hover:scale-150 transition-transform duration-500`}></div>
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className={`text-sm bg-gradient-to-r ${project.gradient} bg-clip-text text-transparent font-bold uppercase tracking-widest`}>
+                      {project.tags[0]}
+                    </div>
+                    {project.isLive && (
+                      <div className="flex items-center">
+                        <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse mr-2"></div>
+                        <span className="text-xs text-green-600 dark:text-green-400 font-semibold">LIVE</span>
+                      </div>
+                    )}
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4 group-hover:text-blue-600 transition-colors duration-300 flex items-center">
+                    {project.title}
+                    {project.link && (
+                      <svg className="w-5 h-5 ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    )}
+                  </h3>
+                  <p className="text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
+                    {project.impact}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag, tagIndex) => (
+                      <motion.span 
+                        key={tag}
+                        initial={{ scale: 0 }}
+                        whileInView={{ scale: 1 }}
+                        transition={{ duration: 0.3, delay: (index * 0.1) + (tagIndex * 0.05) }}
+                        className="px-3 py-2 bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-700 dark:to-slate-600 rounded-full text-xs font-medium hover:scale-110 transition-transform duration-200 cursor-default"
+                      >
+                        {tag}
+                      </motion.span>
+                    ))}
+                  </div>
                 </div>
-                <h3 className="text-2xl font-bold mb-4 group-hover:text-blue-600 transition-colors duration-300">
-                  {project.title}
-                </h3>
-                <p className="text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
-                  {project.impact}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag, tagIndex) => (
-                    <motion.span 
-                      key={tag}
-                      initial={{ scale: 0 }}
-                      whileInView={{ scale: 1 }}
-                      transition={{ duration: 0.3, delay: (index * 0.1) + (tagIndex * 0.05) }}
-                      className="px-3 py-2 bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-700 dark:to-slate-600 rounded-full text-xs font-medium hover:scale-110 transition-transform duration-200 cursor-default"
-                    >
-                      {tag}
-                    </motion.span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          ))}
+              </ProjectWrapper>
+            );
+          })}
           </div>
         </div>
       </motion.section>
