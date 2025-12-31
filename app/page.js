@@ -431,7 +431,10 @@ export default function Home() {
               title: "Imagify - AI SaaS",
               impact: "Full-stack AI-powered text-to-image generator with credit-based system, Stripe integration, and mobile responsiveness.", 
               tags: ["MERN", "AI", "Stripe", "MongoDB", "Clip Drop API"],
-              gradient: "from-blue-700 to-blue-800"
+              gradient: "from-blue-700 to-blue-800",
+              link: "https://imagify-client-fr1p.onrender.com/",
+              isLive: true,
+              
             },
             {
               title: "Supply Chain Platform",
@@ -461,6 +464,19 @@ export default function Home() {
                 className={`group p-8 bg-white dark:bg-slate-800 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-700 hover:shadow-3xl transition-all duration-300 relative overflow-hidden ${project.link ? 'cursor-pointer' : ''}`}
               >
                 <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${project.gradient} opacity-10 rounded-full -translate-y-16 translate-x-16 group-hover:scale-150 transition-transform duration-500`}></div>
+                
+                {/* Project Image */}
+                {project.image && (
+                  <div className="relative z-10 mb-6 rounded-2xl overflow-hidden">
+                    <img 
+                      src={project.image} 
+                      alt={project.title}
+                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+                )}
+                
                 <div className="relative z-10">
                   <div className="flex items-center justify-between mb-3">
                     <div className={`text-sm bg-gradient-to-r ${project.gradient} bg-clip-text text-transparent font-bold uppercase tracking-widest`}>
